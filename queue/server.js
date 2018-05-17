@@ -30,10 +30,10 @@ if (cluster.isMaster) {
 		}
 		if (msg.topic && msg.topic === 'FIND') {
 			// here we increment the counter
-			var pos=corr_id.indexOf(msg.id);
-			if(pos>=0){
+			var pos = corr_id.indexOf(msg.id);
+			if (pos >= 0) {
 				console.log('Confirmed');
-				corr_id.splice (pos, 1); // deleted id from array
+				corr_id.splice(pos, 1); // deleted id from array
 			}
 		}
 	});
@@ -48,7 +48,7 @@ if (cluster.isMaster) {
 			ch.assertQueue('task_queue', {durable: true}, function (err, q) {
 				console.log(' [x] Requesting process(%d)', process.pid);
 				ch.consume(q.queue, function (msg) {
-					console.log('GOT confirm ',process.pid, msg.properties.correlationId);
+					console.log('GOT confirm ', process.pid, msg.properties.correlationId);
 					process.send({topic: 'FIND', id: msg.properties.correlationId});
 				}, {noAck: true});
 				channel = ch;
@@ -66,8 +66,14 @@ if (cluster.isMaster) {
 	app.post('/rest', function (req, res, next) {
 		taskPost(req, res, function (err, result) {
 			console.log(err || '[no error]', result);
+			if (err) res.send(404);
+			else {
+				console.log('result', result);
+				res.send(result);
+			}
+			
 		});
-		res.sendStatus(200);
+		
 	});
 	app.use(function (req, res) {
 		res.status(404);
@@ -96,7 +102,7 @@ if (cluster.isMaster) {
 		json.event = req.query.event;
 		var corr = generateUuid();
 		process.send({topic: 'ADD', id: corr});
-		console.log(process.pid,json);
+		console.log(process.pid, json);
 		console.log(process.pid, corr);
 		channel.sendToQueue('queue3',
 			new Buffer(JSON.stringify(json).toString()),

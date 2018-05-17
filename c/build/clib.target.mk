@@ -4,16 +4,12 @@ TOOLSET := target
 TARGET := clib
 DEFS_Debug := \
 	'-DNODE_GYP_MODULE_NAME=clib' \
-	'-DUSING_UV_SHARED=1' \
-	'-DUSING_V8_SHARED=1' \
-	'-DV8_DEPRECATION_WARNINGS=1' \
 	'-D_DARWIN_USE_64_BIT_INODE=1' \
 	'-D_LARGEFILE_SOURCE' \
 	'-D_FILE_OFFSET_BITS=64' \
 	'-DBUILDING_NODE_EXTENSION' \
 	'-DDEBUG' \
-	'-D_DEBUG' \
-	'-DV8_ENABLE_CHECKS'
+	'-D_DEBUG'
 
 # Flags passed to all source files.
 CFLAGS_Debug := \
@@ -46,16 +42,13 @@ CFLAGS_OBJC_Debug :=
 CFLAGS_OBJCC_Debug :=
 
 INCS_Debug := \
-	-I/Users/ariza/.node-gyp/9.2.0/include/node \
-	-I/Users/ariza/.node-gyp/9.2.0/src \
-	-I/Users/ariza/.node-gyp/9.2.0/deps/uv/include \
-	-I/Users/ariza/.node-gyp/9.2.0/deps/v8/include
+	-I/Users/ariza/.node-gyp/7.10.1/include/node \
+	-I/Users/ariza/.node-gyp/7.10.1/src \
+	-I/Users/ariza/.node-gyp/7.10.1/deps/uv/include \
+	-I/Users/ariza/.node-gyp/7.10.1/deps/v8/include
 
 DEFS_Release := \
 	'-DNODE_GYP_MODULE_NAME=clib' \
-	'-DUSING_UV_SHARED=1' \
-	'-DUSING_V8_SHARED=1' \
-	'-DV8_DEPRECATION_WARNINGS=1' \
 	'-D_DARWIN_USE_64_BIT_INODE=1' \
 	'-D_LARGEFILE_SOURCE' \
 	'-D_FILE_OFFSET_BITS=64' \
@@ -92,10 +85,10 @@ CFLAGS_OBJC_Release :=
 CFLAGS_OBJCC_Release :=
 
 INCS_Release := \
-	-I/Users/ariza/.node-gyp/9.2.0/include/node \
-	-I/Users/ariza/.node-gyp/9.2.0/src \
-	-I/Users/ariza/.node-gyp/9.2.0/deps/uv/include \
-	-I/Users/ariza/.node-gyp/9.2.0/deps/v8/include
+	-I/Users/ariza/.node-gyp/7.10.1/include/node \
+	-I/Users/ariza/.node-gyp/7.10.1/src \
+	-I/Users/ariza/.node-gyp/7.10.1/deps/uv/include \
+	-I/Users/ariza/.node-gyp/7.10.1/deps/v8/include
 
 OBJS := \
 	$(obj).target/$(TARGET)/clib.o

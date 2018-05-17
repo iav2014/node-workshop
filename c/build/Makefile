@@ -41,9 +41,9 @@ all_deps :=
 
 
 CC.target ?= $(CC)
-CFLAGS.target ?= $(CPPFLAGS) $(CFLAGS)
+CFLAGS.target ?= $(CFLAGS)
 CXX.target ?= $(CXX)
-CXXFLAGS.target ?= $(CPPFLAGS) $(CXXFLAGS)
+CXXFLAGS.target ?= $(CXXFLAGS)
 LINK.target ?= $(LINK)
 LDFLAGS.target ?= $(LDFLAGS)
 AR.target ?= $(AR)
@@ -54,9 +54,9 @@ LINK ?= $(CXX.target)
 # TODO(evan): move all cross-compilation logic to gyp-time so we don't need
 # to replicate this environment fallback in make as well.
 CC.host ?= gcc
-CFLAGS.host ?= $(CPPFLAGS_host) $(CFLAGS_host)
+CFLAGS.host ?=
 CXX.host ?= g++
-CXXFLAGS.host ?= $(CPPFLAGS_host) $(CXXFLAGS_host)
+CXXFLAGS.host ?=
 LINK.host ?= $(CXX.host)
 LDFLAGS.host ?=
 AR.host ?= ar
@@ -326,8 +326,8 @@ ifeq ($(strip $(foreach prefix,$(NO_LOAD),\
 endif
 
 quiet_cmd_regen_makefile = ACTION Regenerating $@
-cmd_regen_makefile = cd $(srcdir); /Users/ariza/.nvm/versions/node/v9.2.0/lib/node_modules/node-gyp/gyp/gyp_main.py -fmake --ignore-environment "--toplevel-dir=." -I/Users/ariza/Documents/codigo/node-workshop/c/build/config.gypi -I/Users/ariza/.nvm/versions/node/v9.2.0/lib/node_modules/node-gyp/addon.gypi -I/Users/ariza/.node-gyp/9.2.0/include/node/common.gypi "--depth=." "-Goutput_dir=." "--generator-output=build" "-Dlibrary=shared_library" "-Dvisibility=default" "-Dnode_root_dir=/Users/ariza/.node-gyp/9.2.0" "-Dnode_gyp_dir=/Users/ariza/.nvm/versions/node/v9.2.0/lib/node_modules/node-gyp" "-Dnode_lib_file=/Users/ariza/.node-gyp/9.2.0/<(target_arch)/node.lib" "-Dmodule_root_dir=/Users/ariza/Documents/codigo/node-workshop/c" "-Dnode_engine=v8" binding.gyp
-Makefile: $(srcdir)/../../../../.node-gyp/9.2.0/include/node/common.gypi $(srcdir)/../../../../.nvm/versions/node/v9.2.0/lib/node_modules/node-gyp/addon.gypi $(srcdir)/build/config.gypi $(srcdir)/binding.gyp
+cmd_regen_makefile = cd $(srcdir); /usr/local/lib/node_modules/node-gyp/gyp/gyp_main.py -fmake --ignore-environment "--toplevel-dir=." -I/Users/ariza/Documents/codigo/node-workshop/c/build/config.gypi -I/usr/local/lib/node_modules/node-gyp/addon.gypi -I/Users/ariza/.node-gyp/7.10.1/include/node/common.gypi "--depth=." "-Goutput_dir=." "--generator-output=build" "-Dlibrary=shared_library" "-Dvisibility=default" "-Dnode_root_dir=/Users/ariza/.node-gyp/7.10.1" "-Dnode_gyp_dir=/usr/local/lib/node_modules/node-gyp" "-Dnode_lib_file=node.lib" "-Dmodule_root_dir=/Users/ariza/Documents/codigo/node-workshop/c" binding.gyp
+Makefile: $(srcdir)/../../../../.node-gyp/7.10.1/include/node/common.gypi $(srcdir)/../../../../../../usr/local/lib/node_modules/node-gyp/addon.gypi $(srcdir)/build/config.gypi $(srcdir)/binding.gyp
 	$(call do_cmd,regen_makefile)
 
 # "all" is a concatenation of the "all" targets from all the included
